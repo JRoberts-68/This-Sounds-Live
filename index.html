@@ -3,9 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>This Sounds Live</title>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-    
+    <header>
+        <h1>This Sounds Live</h1>
+        <div class="search-inputs">
+            <input type="text" placeholder="Search for artist">
+            <input type="submit" value="Find">
+        </div>
+    </header>
+    <main>
+        <section class="playing">Currently Playing</section>
+        <article class="events">
+            <h3>Events for *artist*</h3>
+            <ul>
+                <li>An event</li>
+            </ul>
+        </article>
+    </main>
+    <footer id="sources">Spotify and Eventful credits</footer>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src="index.js"></script>
 </body>
 </html>
