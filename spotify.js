@@ -36,7 +36,7 @@ function fetchPlayback (token) {
       s      }
         })
         .then(responseJSON => console.log(responseJSON))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err.message))
 }
 
 function getArtist (json) {
