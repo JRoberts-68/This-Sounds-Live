@@ -19,7 +19,7 @@ function queryFormatter (params) {
     let query = spotifyAuthUrl + '?response_type=token' + '&client_id=' + spotifyID +
     (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
     '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri);
-  return query.join('&');
+  return query;
 }
 
 function spotifyAuth () {
@@ -58,8 +58,9 @@ function loginMessage () {
 function checkForToken () {
     let url = document.location + '';
     let tokenLoc = url.search('access_token') + 13;
+    let denied = url.search('error');
 
-    if(tokenLoc === 12 | url.search('error') !== -1){
+    if(tokenLoc === 12 | denied === 5){
         loginMessage();
     }else {
         let token = url.slice(tokenLoc, url.search('&'));
