@@ -8,12 +8,6 @@ let spotifyParams = {
     scope: "user-read-currently-playing user-read-playback-state",
 }
 
-spotifyAuthUrl +
-  '?response_type=token' +
-  '&client_id=' + spotifyID +
-  (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
-  '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri));
-
 function queryFormatter (params) {
     // let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
     let query = spotifyAuthUrl + '?response_type=token' + '&client_id=' + spotifyID +
@@ -24,14 +18,15 @@ function queryFormatter (params) {
 
 function spotifyAuth () {
     let queryString = queryFormatter(spotifyParams);
-    let authURL = spotifyAuthUrl + '?' + queryString;
+    let authURL = queryString;
     window.location.replace(authURL);
 }
 
 function fetchPlayback (token) {
-    fetch(currentPlayUrl, {
-        Authorization: `Bearer ${token}`,
-    })
+    fetch(currentPlayUrl, {headers: new Headers(
+            {'Authorization': `Bearer ${token}`})
+        }
+    )
         .then(response => {
             if(response.status === 200){
                 return response.json();
