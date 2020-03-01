@@ -34,7 +34,7 @@ function checkForToken () {
     let url = document.location + '';
     let tokenLoc = url.search('access_token') + 13;
 
-    if(tokenLoc === -1){
+    if(tokenLoc === 12){
         loginMessage();
     }else {
         console.log(tokenLoc);
