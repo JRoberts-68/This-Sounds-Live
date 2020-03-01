@@ -1,5 +1,6 @@
 let spotifyAuthUrl = "https://accounts.spotify.com/authorize";
 let spotifyID = "33f74d3d8a694e9c8b21101e8454e868";
+let currentPlayUrl = "https://api.spotify.com/v1/me/player/currently-playing";
 let spotifyParams = {
     client_id: spotifyID,
     response_type: 'token',
@@ -18,8 +19,25 @@ function spotifyAuth () {
     window.location.replace(authURL);
 }
 
-function fetchArtist (token) {
+function fetchPlayback (token) {
+    let currentPlayHeader = {
+        Authorization: 'Bearer' + token
+    }
 
+    fetch(currentPlayUrl, currentPlayHeader)
+        .then(response => {
+            if(response.status === 200){
+                return response.json();
+            } else {
+                throw new Error(alert('No track currently playing'));
+      s      }
+        })
+        .then(responseJSON => console.log(responseJSON))
+        .catch(err => alert(err))
+}
+
+function getArtist (json) {
+    
 }
 
 function loginMessage () {
@@ -40,7 +58,7 @@ function checkForToken () {
         console.log(tokenLoc);
         let token = url.slice(tokenLoc, url.search('&'));
         console.log(token);
-        fetchArtist(token);
+        fetchPlayback(token);
     }
 }
 
