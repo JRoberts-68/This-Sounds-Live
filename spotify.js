@@ -21,7 +21,8 @@ function spotifyAuth () {
 
 function fetchPlayback (token) {
     let currentPlayHeader = {
-        Authorization: 'Bearer' + token
+        Authorization: 'Bearer' + token,
+        scope: "user-read-currently-playing user-read-playback-state"
     }
 
     fetch(currentPlayUrl, currentPlayHeader)
@@ -37,7 +38,7 @@ function fetchPlayback (token) {
 }
 
 function getArtist (json) {
-    
+
 }
 
 function loginMessage () {
