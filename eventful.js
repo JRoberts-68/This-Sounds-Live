@@ -4,7 +4,7 @@ let eventfulId = 'jmHQsH6vVbgcLnmD';
 
 let eventfulParams = {
     app_key: 'eventfulId',
-    keywords: 
+    keywords: 'Lamb of God'
 }
 
 function queryFormatter (params) {
@@ -44,3 +44,6 @@ function displayResults(responseJson){
 $('.events').removeClass('hidden');
 }
 
+/*function artistReader(){
+
+}*/
