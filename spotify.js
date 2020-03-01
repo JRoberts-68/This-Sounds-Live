@@ -6,11 +6,19 @@ let spotifyParams = {
     response_type: 'token',
     redirect_uri: "https://jroberts-68.github.io/This-Sounds-Live/",
     scope: "user-read-currently-playing user-read-playback-state",
-    cache: "no-cache"
 }
 
+spotifyAuthUrl +
+  '?response_type=token' +
+  '&client_id=' + spotifyID +
+  (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
+  '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri));
+
 function queryFormatter (params) {
-    let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    // let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    let query = spotifyAuthUrl + '?response_type=token' + '&client_id=' + spotifyID +
+    (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
+    '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri);
   return query.join('&');
 }
 
@@ -21,22 +29,18 @@ function spotifyAuth () {
 }
 
 function fetchPlayback (token) {
-    let currentPlayHeader = {
+    fetch(currentPlayUrl, {
         Authorization: `Bearer ${token}`,
-    }
-
-    fetch(currentPlayUrl, currentPlayHeader)
+    })
         .then(response => {
             if(response.status === 200){
                 return response.json();
             } else if(response.status === 204){
                 throw new Error(alert('No track currently playing'));
-      s      }
+             }
         })
         .then(responseJSON => console.log(responseJSON))
-        .catch(err => {console.log(err.message());
-            alert(err);
-        })
+        .catch(err => alert(err))
 }
 
 function getArtist (json) {
@@ -55,10 +59,9 @@ function checkForToken () {
     let url = document.location + '';
     let tokenLoc = url.search('access_token') + 13;
 
-    if(tokenLoc === 12){
+    if(tokenLoc === 12 | url.search('error') !== -1){
         loginMessage();
     }else {
-        console.log(tokenLoc);
         let token = url.slice(tokenLoc, url.search('&'));
         console.log(token);
         fetchPlayback(token);
