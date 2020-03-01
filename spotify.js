@@ -34,8 +34,8 @@ function fetchPlayback (token) {
       s      }
         })
         .then(responseJSON => console.log(responseJSON))
-        .catch(err => {console.log(err.statusText);
-            alert('Something went wrong')
+        .catch(err => {console.log(err.message());
+            alert(err);
         })
 }
 
