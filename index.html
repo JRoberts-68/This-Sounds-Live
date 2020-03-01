@@ -17,13 +17,17 @@
     </header>
     <main>
         <section class="playing">Currently Playing</section>
-        <article class="events">
+
+
+        <p id="js-error" class="error-message"></p>
+        <article class="events hidden">
             <h3>Events for *artist*</h3>
-            <ul>
-                <li>An event</li>
-            </ul>
+
+            <ul id="eventful-search-results"></ul>
         </article>
     </main>
+
+
     <footer id="sources">Spotify and Eventful credits</footer>
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
