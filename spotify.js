@@ -6,12 +6,14 @@ let spotifyParams = {
     response_type: 'token',
     redirect_uri: "https://jroberts-68.github.io/This-Sounds-Live/",
     scope: "user-read-currently-playing user-read-playback-state",
-    cache: "no-cache"
 }
 
 function queryFormatter (params) {
     let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-  return query.join('&');
+    // let query = spotifyAuthUrl + '?response_type=token' + '&client_id=' + spotifyID +
+    // (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
+    // '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri);
+  return query;
 }
 
 function spotifyAuth () {
@@ -21,23 +23,23 @@ function spotifyAuth () {
 }
 
 function fetchPlayback (token) {
-    let currentPlayHeader = {header: new Headers({
+
+    let currentPlayHeader = {headers: new Headers({
     Authorization: `Bearer ${token}`,
 })};
 
 
     fetch(currentPlayUrl, currentPlayHeader)
+
         .then(response => {
             if(response.status === 200){
                 return response.json();
             } else if(response.status === 204){
                 throw new Error(alert('No track currently playing'));
-      s      }
+             }
         })
         .then(responseJSON => console.log(responseJSON))
-        .catch(err => {console.log(err.message());
-            alert(err);
-        })
+        .catch(err => alert(err))
 }
 
 function getArtist (json) {
@@ -55,11 +57,11 @@ function loginMessage () {
 function checkForToken () {
     let url = document.location + '';
     let tokenLoc = url.search('access_token') + 13;
+    let denied = url.search('error');
 
-    if(tokenLoc === 12){
+    if(tokenLoc === 12 | denied === 5){
         loginMessage();
     }else {
-        console.log(tokenLoc);
         let token = url.slice(tokenLoc, url.search('&'));
         console.log(token);
         fetchPlayback(token);
