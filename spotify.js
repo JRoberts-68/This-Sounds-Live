@@ -9,16 +9,16 @@ let spotifyParams = {
 }
 
 function queryFormatter (params) {
-    // let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    let query = spotifyAuthUrl + '?response_type=token' + '&client_id=' + spotifyID +
-    (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
-    '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri);
+    let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+    // let query = spotifyAuthUrl + '?response_type=token' + '&client_id=' + spotifyID +
+    // (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
+    // '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri);
   return query;
 }
 
 function spotifyAuth () {
     let queryString = queryFormatter(spotifyParams);
-    let authURL = queryString;
+    let authURL = spotifyAuthUrl + '?' + queryString;
     window.location.replace(authURL);
 }
 
