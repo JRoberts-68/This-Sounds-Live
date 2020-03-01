@@ -5,7 +5,8 @@ let spotifyParams = {
     client_id: spotifyID,
     response_type: 'token',
     redirect_uri: "https://jroberts-68.github.io/This-Sounds-Live/",
-    scope: "user-read-currently-playing user-read-playback-state"
+    scope: "user-read-currently-playing user-read-playback-state",
+    cache: "no-cache"
 }
 
 function queryFormatter (params) {
@@ -21,6 +22,7 @@ function spotifyAuth () {
 
 function fetchPlayback (token) {
     let currentPlayHeader = {
+        client_id: spotifyID,
         Authorization: 'Bearer' + token,
         scope: "user-read-currently-playing user-read-playback-state"
     }
@@ -29,12 +31,12 @@ function fetchPlayback (token) {
         .then(response => {
             if(response.status === 200){
                 return response.json();
-            } else {
+            } else if(response.status === 204){
                 throw new Error(alert('No track currently playing'));
       s      }
         })
         .then(responseJSON => console.log(responseJSON))
-        .catch(err => alert(err))
+        .catch(err => console.log(err))
 }
 
 function getArtist (json) {
