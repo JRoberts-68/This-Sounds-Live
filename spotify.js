@@ -42,7 +42,6 @@ function fetchPlayback (token) {
 }
 
 function getTrackInfo (json) {
-    console.log(json.album.images[1]);
     $('.playing').html(`<figure><img src="${json.album.images[1].url}" alt="${json.album.name} by ${json.artists[0].name} cover"></figure><h4 class="artist">${json.artists[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
 
     return json.artists[0].name;
@@ -65,8 +64,8 @@ function checkForToken () {
         loginMessage();
     }else {
         let token = url.slice(tokenLoc, url.search('&'));
-        console.log(token);
         let playingArtist = fetchPlayback(token);
+        console.log(playingArtist);
         return playingArtist;
     }
 }
