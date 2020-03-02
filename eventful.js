@@ -1,7 +1,8 @@
 
 let eventfulAuthUrl = 'http://api.eventful.com/json/events/search';
 let eventfulId = 'jmHQsH6vVbgcLnmD';
-// let searchArtist = playingArtist;
+let searchArtist = $('.artist').text();
+console.log(searchArtist);
 
 let eventfulParams = {
     app_key: 'eventfulId',

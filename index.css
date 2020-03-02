@@ -2,10 +2,33 @@
     box-sizing: border-box;
 }
 
-header, h1{
+body{
+    background-color: #00DB5F;
+    color: #0A0A02;
+}
+
+a{
+    color: #00DB5F;
+}
+
+a:hover, a:focus{
+    color: #FEFFF7;
+}
+
+a:visited{
+    color: #363536;
+}
+
+header{
+    border-radius: 5px;
+    background-color: #123442;
+    margin-top: 10px;
+    width: 98%;
+}
+
+h1{
     text-align: center;
     margin: auto;
-    background-color: lightgray;
     width: 100%;
 }
 
@@ -19,8 +42,20 @@ h1{
     width: auto;
 }
 
-inputs{
-    border-radius: 30px;
+input{
+    border-radius: 5px;
+    background-color: #00DB5F;
+}
+
+#login{
+    padding: 10px;
+}
+
+main{
+    width: 98%;
+    margin: 0 auto;
+    border-radius: 5px;
+    background-color: #123442;
 }
 
 .playing{
@@ -29,6 +64,7 @@ inputs{
     height: 100%;
     background-color: gray;
     width: 100%;
+    padding: 10px;
 }
 
 figure, p, h3{
@@ -37,14 +73,16 @@ figure, p, h3{
 
 .artist{
     font-size: 24px;
+    margin: 10px;
 }
 
 .album{
     font-style: italic;
 }
 
-h4{
-    margin: 10px;
+
+h3{
+    padding: 10px;
 }
 
 .events{
