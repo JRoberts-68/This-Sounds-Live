@@ -5,7 +5,7 @@ let eventfulId = 'jmHQsH6vVbgcLnmD';
 
 let eventfulParams = {
     app_key: 'eventfulId',
-    // keywords: searchArtist
+    keywords: 'Lamb of God'
 }
 
 function queryFormatter (params) {
