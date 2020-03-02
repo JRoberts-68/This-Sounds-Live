@@ -64,10 +64,6 @@ function checkForToken () {
     }
 }
 
-function onStart () {
-    checkForToken();
-    let searchArtist = $('.artist').text();
+$(checkForToken());
+let searchArtist = $('.artist').text();
     console.log(searchArtist);
-}
-
-$(onStart());
