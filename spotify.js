@@ -7,7 +7,7 @@ let spotifyParams = {
     redirect_uri: "https://jroberts-68.github.io/This-Sounds-Live/",
     scope: "user-read-currently-playing user-read-playback-state",
 }
-let playingArtist = getTrackInfo(responseJSON);
+// let playingArtist = getTrackInfo(responseJSON);
 
 function queryFormatter (params) {
     let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);

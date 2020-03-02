@@ -1,11 +1,11 @@
 
 let eventfulAuthUrl = 'http://api.eventful.com/json/events/search';
 let eventfulId = 'jmHQsH6vVbgcLnmD';
-let searchArtist = playingArtist;
+// let searchArtist = playingArtist;
 
 let eventfulParams = {
     app_key: 'eventfulId',
-    keywords: searchArtist
+    // keywords: searchArtist
 }
 
 function queryFormatter (params) {
