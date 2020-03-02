@@ -65,5 +65,3 @@ function checkForToken () {
 }
 
 $(checkForToken());
-let searchArtist = $('.artist').text();
-    console.log(searchArtist);
