@@ -40,7 +40,7 @@ function fetchPlayback (token) {
 }
 
 function getTrackInfo (json) {
-    console.log(json.artists);
+    console.log(json.artists[0]);
     $('.playing').html(`<figure><img src="${json.album.images[1]}" alt="${json.album.name} by ${json.artists[name]} cover"></figure><h4 class="artist">${json.artist[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
 
     // return json.artist[name];
