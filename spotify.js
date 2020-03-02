@@ -40,9 +40,6 @@ function fetchPlayback (token) {
 
 function getTrackInfo (json) {
     $('.playing').html(`<figure><img src="${json.album.images[1].url}" alt="${json.album.name} by ${json.artists[0].name} cover"></figure><h4 class="artist">${json.artists[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
-
-    let artist = json.artists[0].name;
-
 }
 
 
@@ -67,4 +64,10 @@ function checkForToken () {
     }
 }
 
-$(checkForToken());
+function onStart () {
+    checkForToken();
+    let searchArtist = $('.artist').text();
+    console.log(searchArtist);
+}
+
+$(onStart());
