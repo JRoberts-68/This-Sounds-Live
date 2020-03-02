@@ -35,15 +35,17 @@ function fetchPlayback (token) {
                 throw new Error(alert('No track currently playing'));
              }
         })
-        .then(responseJSON => getTrackInfo(responseJSON.item))
+        .then(responseJSON => {let artist = getTrackInfo(responseJSON.item);
+        return artist;
+    })
         .catch(err => alert(err))
 }
 
 function getTrackInfo (json) {
-    console.log(json.artists[0].name);
+    console.log(json.album.images[1]);
     $('.playing').html(`<figure><img src="${json.album.images[1]}" alt="${json.album.name} by ${json.artists[0].name} cover"></figure><h4 class="artist">${json.artists[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
 
-    // return json.artists[0].name;
+    return json.artists[0].name;
 }
 
 function loginMessage () {
@@ -64,8 +66,9 @@ function checkForToken () {
     }else {
         let token = url.slice(tokenLoc, url.search('&'));
         console.log(token);
-        fetchPlayback(token);
+        let playingArtist = fetchPlayback(token);
     }
+    return playingArtist;
 }
 
 $(checkForToken());
