@@ -16,8 +16,11 @@ h1{
 .search-inputs{
     display: flex;
     justify-content: flex-end;
-    border-radius: 5px;
     width: auto;
+}
+
+inputs{
+    border-radius: 30px;
 }
 
 .playing{
@@ -30,6 +33,10 @@ h1{
 
 figure, p, h3{
     margin: 0;
+}
+
+.artist{
+    font-size: 24px;
 }
 
 .album{
