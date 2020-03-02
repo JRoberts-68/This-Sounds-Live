@@ -32,14 +32,11 @@ function fetchPlayback (token) {
                 return response.json();
             } else if(response.status === 204){
                 throw new Error(alert('No track currently playing'));
-             }
-        })
-        .then(responseJSON => {
-            if(responseJSON === undefined){
+             } else if(response.status === 401){
                 location.reload(true);
-            }else {
-            getTrackInfo(responseJSON.item)}
+            }
         })
+        .then(responseJSON => getTrackInfo(responseJSON.item))
         .catch(err => alert(err))
 }
 
