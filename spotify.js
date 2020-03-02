@@ -7,7 +7,7 @@ let spotifyParams = {
     redirect_uri: "https://jroberts-68.github.io/This-Sounds-Live/",
     scope: "user-read-currently-playing user-read-playback-state",
 }
-// let playingArtist = getTrackInfo(responseJSON);
+let searchArtist = checkForToken();
 
 function queryFormatter (params) {
     let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
@@ -67,8 +67,9 @@ function checkForToken () {
         let token = url.slice(tokenLoc, url.search('&'));
         console.log(token);
         let playingArtist = fetchPlayback(token);
+        return playingArtist;
     }
-    return playingArtist;
 }
 
 $(checkForToken());
+console.log(searchArtist);
