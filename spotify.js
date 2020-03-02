@@ -7,7 +7,6 @@ let spotifyParams = {
     redirect_uri: "https://jroberts-68.github.io/This-Sounds-Live/",
     scope: "user-read-currently-playing user-read-playback-state",
 }
-let searchArtist = checkForToken();
 
 function queryFormatter (params) {
     let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
@@ -35,17 +34,17 @@ function fetchPlayback (token) {
                 throw new Error(alert('No track currently playing'));
              }
         })
-        .then(responseJSON => {let artist = getTrackInfo(responseJSON.item);
-        return artist;
-    })
+        .then(responseJSON => getTrackInfo(responseJSON.item))
         .catch(err => alert(err))
 }
 
 function getTrackInfo (json) {
     $('.playing').html(`<figure><img src="${json.album.images[1].url}" alt="${json.album.name} by ${json.artists[0].name} cover"></figure><h4 class="artist">${json.artists[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
 
-    return json.artists[0].name;
+    let artist = json.artists[0].name;
+
 }
+
 
 function loginMessage () {
     $('.playing').html(`<p class="signin-message">Please sign in to use This Sounds Live</p><input id="login" type="submit" value="Sign In">`);
@@ -64,11 +63,8 @@ function checkForToken () {
         loginMessage();
     }else {
         let token = url.slice(tokenLoc, url.search('&'));
-        let playingArtist = fetchPlayback(token);
-        console.log(playingArtist);
-        return playingArtist;
+        fetchPlayback(token);
     }
 }
 
 $(checkForToken());
-console.log(searchArtist);
