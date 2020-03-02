@@ -2,9 +2,7 @@
 let eventfulAuthUrl = 'http://api.eventful.com/json/events/search';
 let eventfulId = 'jmHQsH6vVbgcLnmD';
 let searchArtist = '';
-$('.artist').ajaxStop(function(){
-      searchArtist = $('.artist').text();  
-})
+$('html').ajaxStop(searchArtist = $('.artist').text())
 console.log(searchArtist);
 
 let eventfulParams = {
