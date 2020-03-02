@@ -9,10 +9,7 @@ let spotifyParams = {
 }
 
 function queryFormatter (params) {
-    let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    // let query = spotifyAuthUrl + '?response_type=token' + '&client_id=' + spotifyID +
-    // (spotifyParams.scope ? '&scope=' + encodeURIComponent(spotifyParams.scope) : '') +
-    // '&redirect_uri=' + encodeURIComponent(spotifyParams.redirect_uri);
+    let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`);
   return query;
 }
 
@@ -38,12 +35,14 @@ function fetchPlayback (token) {
                 throw new Error(alert('No track currently playing'));
              }
         })
-        .then(responseJSON => console.log(responseJSON))
+        .then(responseJSON => getTrackInfo(responseJSON.item))
         .catch(err => alert(err))
 }
 
-function getArtist (json) {
+function getTrackInfo (json) {
+    $('.playing').html(`<figure><img src="${json.album.images[1]}" alt="${json.album.name} by ${json.artist[0].name} cover"></figure><h4 class="artist">${json.artist[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
 
+    return json.artist[0].name;
 }
 
 function loginMessage () {
