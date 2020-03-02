@@ -1,7 +1,7 @@
 
 let eventfulAuthUrl = 'http://api.eventful.com/json/events/search';
 let eventfulId = 'jmHQsH6vVbgcLnmD';
-let searchArtist = $(window).load(function(){
+let searchArtist = $('.artist').load(function(){
       return $('.artist').text();
 })
 console.log(searchArtist);
