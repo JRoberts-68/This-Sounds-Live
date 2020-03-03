@@ -1,13 +1,13 @@
 
-let eventfulAuthUrl = 'http://api.eventful.com/json/events/search';
-let eventfulId = 'jmHQsH6vVbgcLnmD';
-let searchArtist = '';
+let ticketmasterAuthUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
+let ticketmasterId = 'I4bfDLlgDuBOdPEOtWt8ZeYYl1gHgbku';
+/*let searchArtist = '';
 $('html').ajaxStop(searchArtist = $('.artist').text())
 console.log(searchArtist);
-
-let eventfulParams = {
-    app_key: 'eventfulId',
-    keywords: 'Lamb of God'
+*/
+let ticketmasterParams = {
+    apikey: ticketmasterId,
+    keywords: 'Slayer'
 }
 
 function queryFormatter (params) {
@@ -15,29 +15,41 @@ function queryFormatter (params) {
   return query.join('&');
 }
 
-function eventfulResp(array, maxResults=10){
-  let queryString = queryFormatter(eventfulParams);
-  let eventfulBuildUrl = eventfulAuthUrl + '?' + queryString;
-  console.log(eventfulBuildUrl)
-  fetch(eventfulBuildUrl)
+function ticketmasterBuildUrl(){
+  let queryString = queryFormatter(ticketmasterParams);
+  let ticketmasterBuildUrl = ticketmasterAuthUrl + '?' + ticketmasterParams;
+}
+
+function ticketmasterResp(array, maxResults=10){
+  let queryString = queryFormatter(ticketmasterParams);
+  console.log(ticketmasterBuildUrl)
+  console.log(queryString)
+  //fetch(ticketmasterBuildUrl, {
+   // mode: 'cors'
+  //})
+  console.log(ticketmasterResp)
     .then(response => {
+      console.log(response)
       if (response.ok) {
         return response.json();
       }
+      
       throw new Error(response.statusText);
     })
     .then(responseJson => displayResults(responseJson))
+    .then(responseJson => console.log(responseJson))
     .catch(err => {
-      $('#js-error').text(`Something went wrong: ${err.message}`);
+     // $('#js-error').text(`Something went wrong: ${err.message}`);
+     console.log(err); 
     });
 }
 
 
 function displayResults(responseJson){
   console.log(responseJson);
-  $("#eventful-search-results").empty();
+  $("#ticketmaster-search-results").empty();
   for (let i=0; i < responseJson.data.length; i++){
-    $('#eventful-search-results').append(
+    $('#ticketmaster-search-results').append(
       `<li><h3>${responseJson.data[i].name}</h3>
       <p>${responseJson.data[i].description}</p>
       <a href="${responseJson.data[i].url}">${responseJson.data[i].url}</a>
@@ -47,6 +59,24 @@ function displayResults(responseJson){
 $('.events').removeClass('hidden');
 }
 
-/*function artistReader(){
+ticketmasterResp();
 
-}*/
+
+
+
+/*
+function artistReader(){
+
+}
+
+to add to 
+  title
+  location
+  date
+  image of the event should there be one
+
+
+
+
+
+*/
