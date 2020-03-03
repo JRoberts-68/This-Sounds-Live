@@ -32,7 +32,9 @@ function fetchPlayback (token) {
                 return response.json();
             } else if(response.status === 204){
                 throw new Error(alert('No track currently playing'));
-             } 
+             } else if(response.status === 401) {
+                    window.location.replace('https://jroberts-68.github.io/This-Sounds-Live/');
+             }
         })
         .then(responseJSON => getTrackInfo(responseJSON.item))
         .catch(err => alert(err))
