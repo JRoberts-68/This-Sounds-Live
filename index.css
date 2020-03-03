@@ -5,7 +5,7 @@
 
 body{
     background-color: #00DB5F;
-    color: #FEFFF7;
+    color: #00DB5F;
 }
 
 a{
@@ -48,12 +48,16 @@ h1{
 input{
     border-radius: 5px;
     background-color: #123442;
-    color: #FEFFF7;
-    border: #FEFFF7;
+    color: #00DB5F;
+    border: 1px solid #00DB5F;
 }
 
 #search-bar{
-    background-color: rgba(18,52,66,0.8);
+    background-color: rgba(0,219,95,0.8);
+}
+
+#search-bar::placeholder{
+    color: #FEFFF7;
 }
 
 #login{
@@ -102,7 +106,7 @@ h3{
 .events{
     height: 250px;
     border-radius: 5px;
-    background-color: rgba(1, 7, 36,0.6);
+    background-color: rgba(1, 7, 36,0.8);
 }
 
 li{
@@ -112,5 +116,6 @@ li{
 #sources{
     font-size: 10px;
     text-align: center;
+    color: #FEFFF7;
     margin: auto;
 }
