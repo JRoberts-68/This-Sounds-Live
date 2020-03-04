@@ -16,7 +16,7 @@ function displayResults(json, query){
   for (let i=0; i < json.length; i++){
     html += `<li><h3>${json[i].name}</h3>
       <p>${json[i].dates.start.localDate} ${json[i].dates.start.localTime}</p>
-      <a href="${json[i].url}">${json[i].url}</a>
+      <a href="${json[i].url}" target="_blank">${json[i].url}</a>
       </li>`;
   }
   $('#ticketmaster-search-results').html(html)
