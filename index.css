@@ -105,13 +105,14 @@ h3{
 }
 
 .events{
-    height: 250px;
+    height: 100%;
     border-radius: 5px;
     background-color: rgba(1, 7, 36,0.8);
 }
 
 li{
     list-style-type: none;
+    text-align: left;
 }
 
 #sources{
