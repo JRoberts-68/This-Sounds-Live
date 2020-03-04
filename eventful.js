@@ -12,8 +12,8 @@ function queryFormatter (params) {
   return query.join('&');
 }
 
-function displayResults(responseJson){
-  console.log(responseJson);
+function displayResults(json){
+  console.log(json);
   $("#ticketmaster-search-results").empty();
   for (let i=0; i < responseJson.data.length; i++){
     $('#ticketmaster-search-results').append(
