@@ -8,9 +8,10 @@ function queryFormatter (params) {
   return query.join('&');
 }
 
-function displayResults(json){
+function displayResults(json, query){
   console.log(json);
   $("#ticketmaster-search-results").empty();
+  $('h3').text(`Events for ${query}`);
   let html = "";
   for (let i=0; i < json.length; i++){
     html += `<li><h3>${json[i].name}</h3>
@@ -39,7 +40,7 @@ function ticketmasterBuildUrl(query){
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson._embedded.events))
+    .then(responseJson => displayResults(responseJson._embedded.events, query))
       .catch(err => {
         $('#js-error').text(`Something went wrong: ${err.message}`);
       });
