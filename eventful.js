@@ -5,45 +5,12 @@ let ticketmasterId = 'I4bfDLlgDuBOdPEOtWt8ZeYYl1gHgbku';
 $('html').ajaxStop(searchArtist = $('.artist').text())
 console.log(searchArtist);
 */
-let ticketmasterParams = {
-    apikey: ticketmasterId,
-    keywords: 'Slayer'
-}
+
 
 function queryFormatter (params) {
     let query = Object.keys(params).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   return query.join('&');
 }
-
-function ticketmasterBuildUrl(){
-  let queryString = queryFormatter(ticketmasterParams);
-  let ticketmasterBuildUrl = ticketmasterAuthUrl + '?' + ticketmasterParams;
-}
-
-function ticketmasterResp(array, maxResults=10){
-  let queryString = queryFormatter(ticketmasterParams);
-  console.log(ticketmasterBuildUrl)
-  console.log(queryString)
-  //fetch(ticketmasterBuildUrl, {
-   // mode: 'cors'
-  //})
-  console.log(ticketmasterResp)
-    .then(response => {
-      console.log(response)
-      if (response.ok) {
-        return response.json();
-      }
-      
-      throw new Error(response.statusText);
-    })
-    .then(responseJson => displayResults(responseJson))
-    .then(responseJson => console.log(responseJson))
-    .catch(err => {
-     // $('#js-error').text(`Something went wrong: ${err.message}`);
-     console.log(err); 
-    });
-}
-
 
 function displayResults(responseJson){
   console.log(responseJson);
@@ -59,15 +26,42 @@ function displayResults(responseJson){
 $('.events').removeClass('hidden');
 }
 
-ticketmasterResp();
+
+function ticketmasterBuildUrl(){
+  let ticketmasterParams = {
+    apikey: ticketmasterId,
+    keywords: 'Slayer'
+}
+  let queryString = queryFormatter(ticketmasterParams);
+  let ticketmasterBuildUrl = ticketmasterAuthUrl + '?' + queryString;
+
+  fetch (ticketmasterBuildUrl)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error(response.statusText);
+    })
+    .then(responseJson => displayResults(responseJson))
+      .catch(err => {
+        $('#js-error').text(`Something went wrong: ${err.message}`);
+      });
+}
 
 
+function watchForm() {
+  $('#search-bar').submit(event => {
+    event.preventDefault();
+    const searchTerm = $('.js-search').val();
+    const maxResults = $('#ticketmaster-search-results').val();
+    ticketmasterBuildUrl(searchTerm, maxResults);
+  });
+}
+$(watchForm());
 
 
 /*
-function artistReader(){
 
-}
 
 to add to 
   title
