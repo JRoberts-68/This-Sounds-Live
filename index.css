@@ -45,7 +45,7 @@ h1{
     width: auto;
 }
 
-input{
+input, button{
     border-radius: 5px;
     background-color: #123442;
     color: #00DB5F;
@@ -54,6 +54,7 @@ input{
 
 #search-bar{
     background-color: rgba(0,219,95,0.8);
+    color: #123442;
 }
 
 #search-bar::placeholder{
