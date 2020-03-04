@@ -26,6 +26,7 @@ function displayResults(responseJson){
 $('.events').removeClass('hidden');
 }
 
+// just a test
 
 function ticketmasterBuildUrl(){
   let ticketmasterParams = {
