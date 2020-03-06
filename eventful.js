@@ -16,14 +16,10 @@ function displayResults(json, query){
   for (let i=0; i < json.length; i++){
     console.log(json[i].id);
     html += `<li><h3>${json[i].name}</h3>
-      <p>${json[i].dates.start.localDate} ${json[i].dates.start.localTime}</p>
-      <p>${json[i].pricesRanges[0].min} ${json[i].pricesRanges[0].max}</p>
-      <a href="${json[i].url}" rel="noopener noreferrer" target="_blank">For more information about ${json[i].name} click here</a></li>`;
-      
-      let eventIdUrl = `https://app.ticketmaster.com/discovery/v2/events/` + json[i].id + `.json?apikey=${ticketmasterId}`;
-
-      // html += `
-      // `
+      <p>${moment(json[i].dates.start.localDate + " " + json[i].dates.start.localTime).format('MMMM Do YYYY, h:mm a')}</p>
+      <p> ${json[i].priceRanges[0].min} - ${json[i].priceRanges[0].max} ${json[i].priceRanges[0].currency}</p>
+      <a href="${json[i].url}" rel="noreferrer noopener" target="_blank">For event info click here</a>
+      </li>`;
   }
   $('#ticketmaster-search-results').html(html)
 $('.events').removeClass('hidden');
@@ -50,9 +46,15 @@ function ticketmasterBuildUrl(query){
 
     //   let promises = [];
     //   responseJson._embedded.events.forEach(event => {
+<<<<<<< HEAD
     //     promises.push(
     //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}.json?apikey=${ticketmasterId}`)
     //     );
+=======
+    //     setTimeout(promises.push(
+    //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}?apikey=${ticketmasterId}`, {mode:'no-cors' ,headers:{origin:'https://jroberts-68.github.io/This-Sounds-Live/'}})
+    //     ),5000);
+>>>>>>> cfb690c843d896b3740e0fbb4aa3ae8443db4a67
     //   })
     // console.log(promises);
       displayResults(responseJson._embedded.events, query)
