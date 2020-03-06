@@ -46,15 +46,9 @@ function ticketmasterBuildUrl(query){
 
     //   let promises = [];
     //   responseJson._embedded.events.forEach(event => {
-<<<<<<< HEAD
-    //     promises.push(
-    //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}.json?apikey=${ticketmasterId}`)
-    //     );
-=======
     //     setTimeout(promises.push(
     //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}?apikey=${ticketmasterId}`, {mode:'no-cors' ,headers:{origin:'https://jroberts-68.github.io/This-Sounds-Live/'}})
     //     ),5000);
->>>>>>> cfb690c843d896b3740e0fbb4aa3ae8443db4a67
     //   })
     // console.log(promises);
       displayResults(responseJson._embedded.events, query)
