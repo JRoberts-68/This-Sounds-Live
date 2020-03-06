@@ -15,8 +15,9 @@ function displayResults(json, query){
   let html = "";
   for (let i=0; i < json.length; i++){
     html += `<li><h3>${json[i].name}</h3>
-      <p>${json[i].dates.start.localDate} ${json[i].dates.start.localTime}</p>
-      <a href="${json[i].url}" target="_blank">${json[i].url}</a>
+      <p>${moment(json[i].dates.start.localDate + " " + json[i].dates.start.localTime).format('MMMM Do YYYY, h:mm a')}</p>
+      <p> ${json[i].priceRanges[0].min} - ${json[i].priceRanges[0].max} ${json[i].priceRanges[0].currency}</p>
+      <a href="${json[i].url}" rel="noreferrer noopener" target="_blank">For event info click here</a>
       </li>`;
   }
   $('#ticketmaster-search-results').html(html)
@@ -40,7 +41,17 @@ function ticketmasterBuildUrl(query){
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson._embedded.events, query))
+    .then(responseJson => {
+
+    //   let promises = [];
+    //   responseJson._embedded.events.forEach(event => {
+    //     setTimeout(promises.push(
+    //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}?apikey=${ticketmasterId}`, {mode:'no-cors' ,headers:{origin:'https://jroberts-68.github.io/This-Sounds-Live/'}})
+    //     ),5000);
+    //   })
+    // console.log(promises);
+      displayResults(responseJson._embedded.events, query)
+    })
       .catch(err => {
         $('#js-error').text(`Something went wrong: ${err.message}`);
       });

@@ -31,7 +31,8 @@ function fetchPlayback (token) {
             if(response.status === 200){
                 return response.json();
             } else if(response.status === 204){
-                throw new Error(alert('No track currently playing'));
+                alert('To get events for the currently playing artist on Spotify play a track.');
+                window.location.replace('https://jroberts-68.github.io/This-Sounds-Live/');
              } else if(response.status === 401) {
                     window.location.replace('https://jroberts-68.github.io/This-Sounds-Live/');
              }
