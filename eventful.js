@@ -21,8 +21,8 @@ function displayResults(json, query){
       <a href="${json[i].url}" rel="noreferrer noopener" target="_blank">For event info click here</a>
       </li>`;
   }
-  $('#ticketmaster-search-results').html(html)
-$('.events').show();
+  $('#ticketmaster-search-results').html(html);
+  $('.events').show();
 }
 
 // just a test
@@ -35,7 +35,7 @@ function ticketmasterBuildUrl(query){
   let queryString = queryFormatter(ticketmasterParams);
   let ticketmasterUrl = ticketmasterAuthUrl + '?' + queryString;
 
-  fetch (ticketmasterUrl, {mode: "no-cors"})
+  fetch (ticketmasterUrl)
     .then(response => {
       if (response.ok) {
         return response.json();
