@@ -1,5 +1,5 @@
 
-let ticketmasterAuthUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
+let ticketmasterAuthUrl = 'https://app.ticketmaster.com/discovery/v2/events.json/';
 let ticketmasterId = 'I4bfDLlgDuBOdPEOtWt8ZeYYl1gHgbku';
 
 
@@ -14,10 +14,16 @@ function displayResults(json, query){
   $('h3').text(`Events for ${query}`);
   let html = "";
   for (let i=0; i < json.length; i++){
+    console.log(json[i].id);
     html += `<li><h3>${json[i].name}</h3>
       <p>${json[i].dates.start.localDate} ${json[i].dates.start.localTime}</p>
-      <a href="${json[i].url}" target="_blank">${json[i].url}</a>
-      </li>`;
+      <p>${json[i].pricesRanges[0].min} ${json[i].pricesRanges[0].max}</p>
+      <a href="${json[i].url}" rel="noopener noreferrer" target="_blank">For more information about ${json[i].name} click here</a></li>`;
+      
+      let eventIdUrl = `https://app.ticketmaster.com/discovery/v2/events/` + json[i].id + `.json?apikey=${ticketmasterId}`;
+
+      // html += `
+      // `
   }
   $('#ticketmaster-search-results').html(html)
 $('.events').removeClass('hidden');
@@ -40,7 +46,17 @@ function ticketmasterBuildUrl(query){
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson._embedded.events, query))
+    .then(responseJson => {
+
+    //   let promises = [];
+    //   responseJson._embedded.events.forEach(event => {
+    //     promises.push(
+    //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}.json?apikey=${ticketmasterId}`)
+    //     );
+    //   })
+    // console.log(promises);
+      displayResults(responseJson._embedded.events, query)
+    })
       .catch(err => {
         $('#js-error').text(`Something went wrong: ${err.message}`);
       });
