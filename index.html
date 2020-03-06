@@ -6,6 +6,7 @@
     <title>This Sounds Live</title>
     <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:600|Righteous&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 <body>
@@ -14,22 +15,16 @@
         <form class="search-inputs">
             <input id="search-bar" type="text" class= "js-search" placeholder="Search for artist">
             <button type="submit"><img src="images/search-icon-green.png" alt="Search button" height="24" width="24"></button>
-
         </form>
     </header>
     <main>
         <section class="playing">Currently Playing</section>
-
-
-        
-        <article class="events hidden">
-            <h3>Events for *artist*</h3>
+        <article class="events">
+            <h3></h3>
             <p id="js-error" class="error-message"></p>
             <ul id="ticketmaster-search-results"></ul>
         </article>
     </main>
-
-
     <footer id="sources">Spotify and Ticketmaster credits</footer>
     <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"

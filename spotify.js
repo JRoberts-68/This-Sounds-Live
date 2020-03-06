@@ -56,6 +56,7 @@ function loginMessage () {
 }
 
 function checkForToken () {
+    $('.events').hide();
     let url = document.location + '';
     let tokenLoc = url.search('access_token') + 13;
     let denied = url.search('error');

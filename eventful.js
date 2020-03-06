@@ -22,7 +22,7 @@ function displayResults(json, query){
       </li>`;
   }
   $('#ticketmaster-search-results').html(html)
-$('.events').removeClass('hidden');
+$('.events').show();
 }
 
 // just a test
@@ -35,24 +35,14 @@ function ticketmasterBuildUrl(query){
   let queryString = queryFormatter(ticketmasterParams);
   let ticketmasterUrl = ticketmasterAuthUrl + '?' + queryString;
 
-  fetch (ticketmasterUrl)
+  fetch (ticketmasterUrl, {mode: "no-cors"})
     .then(response => {
       if (response.ok) {
         return response.json();
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => {
-
-    //   let promises = [];
-    //   responseJson._embedded.events.forEach(event => {
-    //     setTimeout(promises.push(
-    //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}?apikey=${ticketmasterId}`, {mode:'no-cors' ,headers:{origin:'https://jroberts-68.github.io/This-Sounds-Live/'}})
-    //     ),5000);
-    //   })
-    // console.log(promises);
-      displayResults(responseJson._embedded.events, query)
-    })
+    .then(responseJson => displayResults(responseJson._embedded.events, query))
       .catch(err => {
         $('#js-error').text(`Something went wrong: ${err.message}`);
       });
@@ -79,7 +69,14 @@ to add to
   date
   image of the event should there be one
 
+    //   let promises = [];
+    //   responseJson._embedded.events.forEach(event => {
+    //     setTimeout(promises.push(
+    //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}?apikey=${ticketmasterId}`, {mode:'no-cors' ,headers:{origin:'https://jroberts-68.github.io/This-Sounds-Live/'}})
+    //     ),5000);
 
+    //   })
+    // console.log(promises);
 
 
 
