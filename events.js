@@ -8,6 +8,8 @@ function queryFormatter (params) {
   return query.join('&');
 }
 
+// displays results recieved and iterates through different if statements to gather and display relevent data
+
 function displayResults(json, query){
   $("#ticketmaster-search-results").empty();
   $('#js-error').empty();
@@ -53,6 +55,8 @@ function displayResults(json, query){
   $('.events').show();
 }
 
+// builds then fetches the search url to create the proper pathway to return requested information
+
 function ticketmasterBuildUrl(query){
   let ticketmasterParams = {
     keyword: query,
@@ -73,6 +77,7 @@ function ticketmasterBuildUrl(query){
       });
 }
 
+// watchform to hold events until the information needed is submitted
 
 function watchForm() {
   $('.search-inputs').submit(event => {
@@ -84,24 +89,3 @@ function watchForm() {
 $(watchForm());
 
 
-/*
-
-
-to add to 
-  title
-  location
-  date
-  image of the event should there be one
-<p> ${json[i].priceRanges[0].min} - ${json[i].priceRanges[0].max} ${json[i].priceRanges[0].currency}</p>
-    //   let promises = [];
-    //   responseJson._embedded.events.forEach(event => {
-    //     setTimeout(promises.push(
-    //       fetch(`https://app.ticketmaster.com/discovery/v2/events/${event.id}?apikey=${ticketmasterId}`, {mode:'no-cors' ,headers:{origin:'https://jroberts-68.github.io/This-Sounds-Live/'}})
-    //     ),5000);
-
-    //   })
-    // console.log(promises);
-
-
-
-*/
