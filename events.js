@@ -50,7 +50,7 @@ function displayResults(json, query){
     }
     html += `</li><br>`;
   }
-  console.log('get here');
+  
   $('#ticketmaster-search-results').html(html);
   $('.events').show();
 }
