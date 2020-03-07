@@ -35,7 +35,7 @@ function ticketmasterBuildUrl(query){
   let queryString = queryFormatter(ticketmasterParams);
   let ticketmasterUrl = ticketmasterAuthUrl + '?' + queryString;
 
-  fetch (ticketmasterUrl)
+  fetch (ticketmasterUrl, {headers: new Headers({'Access-Control-Allow-Origin': 'https://jroberts-68.github.io/This-Sounds-Live/','Vary': 'Origin'})})
     .then(response => {
       if (response.ok) {
         return response.json();

@@ -22,7 +22,7 @@ function spotifyAuth () {
 function fetchPlayback (token) {
 
     let currentPlayHeader = {headers: new Headers({
-    Authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`
 })};
 
     fetch(currentPlayUrl, currentPlayHeader)
