@@ -5,5 +5,9 @@ The list will contain the event name, location, pricing information, date, and a
 ## Demo
 https://jroberts-68.github.io/This-Sounds-Live/
 ## Technologies
-Technologies included in this were HTML/CSS/JavaScript/jQuery.
+Technologies included in this were HTML/CSS/JavaScript/jQuery/Moment.
 ## Screenshots
+![Sign in page](/images/sign-in.png "Sign in page")
+![Currently playing artist](/images/playing.png "Currently Playing")
+![Events list](/images/events.png "Events listed for artist")
+![Error message when no track is playing](/images/no-track.png "Error for no currently playing track")
