@@ -43,6 +43,7 @@ function fetchPlayback (token) {
 
 function getTrackInfo (json) {
     $('.playing').html(`<figure><img src="${json.album.images[1].url}" alt="${json.album.name} by ${json.artists[0].name} cover"></figure><h4 class="artist">${json.artists[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
+    // passes artist name as a query to ticketmaster
     ticketmasterBuildUrl(json.artists[0].name);
 }
 
@@ -54,7 +55,7 @@ function loginMessage () {
         spotifyAuth();
     })
 }
-
+// Check if user has access token from Spotify
 function checkForToken () {
     $('.events').hide();
     let url = document.location + '';
@@ -62,9 +63,11 @@ function checkForToken () {
     let denied = url.search('error');
 
     if(tokenLoc === 12 | denied === 5){
+        // if not logged in or denied access they are taken to the home screen
         loginMessage();
     }else {
         let token = url.slice(tokenLoc, url.search('&'));
+        // token found and playback is fetched
         fetchPlayback(token);
     }
 }
