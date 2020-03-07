@@ -48,7 +48,7 @@ function getTrackInfo (json) {
 
 
 function loginMessage () {
-    $('.playing').html(`<p class="signin-message">Please sign in to use This Sounds Live</p><input id="login" type="submit" value="Sign In">`);
+    $('.playing').html(`<p class="signin-message">Please sign in to use This Sounds Live or search for events</p><input id="login" type="submit" value="Sign In">`);
     $('#login').click(function(event){
         event.preventDefault();
         spotifyAuth();
