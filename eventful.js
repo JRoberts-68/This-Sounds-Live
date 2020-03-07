@@ -1,5 +1,5 @@
 
-let ticketmasterAuthUrl = 'https://app.ticketmaster.com/discovery/v2/events.json/';
+let ticketmasterAuthUrl = 'https://app.ticketmaster.com/discovery/v2/events.json';
 let ticketmasterId = 'I4bfDLlgDuBOdPEOtWt8ZeYYl1gHgbku';
 
 
@@ -11,15 +11,17 @@ function queryFormatter (params) {
 function displayResults(json, query){
   console.log(json);
   $("#ticketmaster-search-results").empty();
+  $('#js-error').empty();
   $('h3').text(`Events for ${query}`);
   let html = "";
   for (let i=0; i < json.length; i++){
-    console.log(json[i].id);
     html += `<li><h3>${json[i].name}</h3>
+      <p>${json[i]._embedded.venues[0].name}</p>
       <p>${moment(json[i].dates.start.localDate + " " + json[i].dates.start.localTime).format('MMMM Do YYYY, h:mm a')}</p>
+      <p>${json[i]._embedded.venues[0].address.line1}</p>
+      <p>${json[i]._embedded.venues[0].city.name}, ${json[i]._embedded.venues[0].state.stateCode}, ${json[i]._embedded.venues[0].country.countryCode} ${json[i]._embedded.venues[0].postalCode}</p>
       <p> ${json[i].priceRanges[0].min} - ${json[i].priceRanges[0].max} ${json[i].priceRanges[0].currency}</p>
-      <a href="${json[i].url}" rel="noreferrer noopener" target="_blank">For event info click here</a>
-      </li>`;
+      <a href="${json[i].url}" rel="noreferrer noopener" target="_blank">For more event info click here</a></li><br>`;
   }
   $('#ticketmaster-search-results').html(html);
   $('.events').show();
@@ -29,13 +31,12 @@ function displayResults(json, query){
 
 function ticketmasterBuildUrl(query){
   let ticketmasterParams = {
-    apikey: ticketmasterId,
     keyword: query,
+    apikey: ticketmasterId
 }
   let queryString = queryFormatter(ticketmasterParams);
   let ticketmasterUrl = ticketmasterAuthUrl + '?' + queryString;
-
-  fetch (ticketmasterUrl, {headers: new Headers({'Access-Control-Allow-Origin': 'https://jroberts-68.github.io/This-Sounds-Live/','Vary': 'Origin'})})
+  fetch (ticketmasterUrl)
     .then(response => {
       if (response.ok) {
         return response.json();

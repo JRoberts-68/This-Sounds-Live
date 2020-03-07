@@ -105,8 +105,9 @@ figure, p, h3{
 
 
 h3{
-    padding: 10px;
+    padding-bottom: 10px;
     text-align: center;
+    font-size: 24px;
 }
 
 .events{
