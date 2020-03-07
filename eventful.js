@@ -9,25 +9,49 @@ function queryFormatter (params) {
 }
 
 function displayResults(json, query){
-  console.log(json);
   $("#ticketmaster-search-results").empty();
   $('#js-error').empty();
+  if(json._embedded === undefined){
+    $('h3').text(`No events for ${query}`);
+    $('.events').show();
+    return;
+  } 
+  json = json._embedded.events;
   $('h3').text(`Events for ${query}`);
   let html = "";
   for (let i=0; i < json.length; i++){
-    html += `<li><h3>${json[i].name}</h3>
-      <p>${json[i]._embedded.venues[0].name}</p>
-      <p>${moment(json[i].dates.start.localDate + " " + json[i].dates.start.localTime).format('MMMM Do YYYY, h:mm a')}</p>
-      <p>${json[i]._embedded.venues[0].address.line1}</p>
-      <p>${json[i]._embedded.venues[0].city.name}, ${json[i]._embedded.venues[0].state.stateCode}, ${json[i]._embedded.venues[0].country.countryCode} ${json[i]._embedded.venues[0].postalCode}</p>
-      <p> ${json[i].priceRanges[0].min} - ${json[i].priceRanges[0].max} ${json[i].priceRanges[0].currency}</p>
-      <a href="${json[i].url}" rel="noreferrer noopener" target="_blank">For more event info click here</a></li><br>`;
+    let event = json[i];
+    html += "<li>";
+    // name of venue
+    if(event.name !== undefined){
+      html += `<h3>${event.name}</h3>`;
+    }
+    // date of venue
+    if(event.dates !== undefined){
+      html += `<p>${moment(event.dates.start.localDate + " " + event.dates.start.localTime).format('MMMM Do YYYY, h:mm a')}</p>`;
+    }
+    // address of venue
+    if(event._embedded !== undefined){
+      if(event._embedded.venues[0].state !== undefined){
+      html += `<p>${event._embedded.venues[0].address.line1}</p><p>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}, ${event._embedded.venues[0].country.countryCode} ${event._embedded.venues[0].postalCode}</p>`;
+    }else{
+     html += `<p>${event._embedded.venues[0].address.line1}</p>
+      <p>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].country.countryCode} ${event._embedded.venues[0].postalCode}</p>`
+    }}
+    // price ranges
+    if(event.priceRanges!== undefined){
+      html += `<p> ${event.priceRanges[0].min} - ${event.priceRanges[0].max} ${event.priceRanges[0].currency}</p>`;
+    }
+    // event url
+    if(event.url!== undefined){
+      html += `<a href="${event.url}" rel="noreferrer noopener" target="_blank">For more event info click here</a>`;
+    }
+    html += `</li><br>`;
   }
+  console.log('get here');
   $('#ticketmaster-search-results').html(html);
   $('.events').show();
 }
-
-// just a test
 
 function ticketmasterBuildUrl(query){
   let ticketmasterParams = {
@@ -43,13 +67,12 @@ function ticketmasterBuildUrl(query){
       }
       throw new Error(response.statusText);
     })
-    .then(responseJson => displayResults(responseJson._embedded.events, query))
+    .then(responseJson => displayResults(responseJson, query))
       .catch(err => {
         $('#js-error').text(`Something went wrong: ${err.message}`);
       });
 }
 
-//console.log(ticketmasterBuildUrl)
 
 function watchForm() {
   $('.search-inputs').submit(event => {
@@ -69,7 +92,7 @@ to add to
   location
   date
   image of the event should there be one
-
+<p> ${json[i].priceRanges[0].min} - ${json[i].priceRanges[0].max} ${json[i].priceRanges[0].currency}</p>
     //   let promises = [];
     //   responseJson._embedded.events.forEach(event => {
     //     setTimeout(promises.push(
