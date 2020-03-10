@@ -37,14 +37,18 @@ function fetchPlayback (token) {
                     window.location.replace('https://jroberts-68.github.io/This-Sounds-Live/');
              }
         })
-        .then(responseJSON => getTrackInfo(responseJSON.item))
+        .then(responseJSON => getTrackInfo(responseJSON))
         .catch(err => alert(err))
 }
 
 function getTrackInfo (json) {
-    $('.playing').html(`<figure><img src="${json.album.images[1].url}" alt="${json.album.name} by ${json.artists[0].name} cover"></figure><h4 class="artist">${json.artists[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
+    json = json.item;
+    if(json !== undefined) {
+        $('.playing').html(`<figure><img src="${json.album.images[1].url}" alt="${json.album.name} by ${json.artists[0].name} cover"></figure><h4 class="artist">${json.artists[0].name}</h4><p class="song">${json.name}</p><p class="album">${json.album.name}</p>`);
     // passes artist name as a query to ticketmaster
-    ticketmasterBuildUrl(json.artists[0].name);
+        ticketmasterBuildUrl(json.artists[0].name);} else{
+            $('.playing').html(`<p>No track info</p>`);
+        }
 }
 
 
