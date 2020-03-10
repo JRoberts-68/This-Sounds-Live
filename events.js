@@ -19,10 +19,12 @@ function displayResults(json, query){
     return;
   } 
   json = json._embedded.events;
+  console.log(json);
   $('h3').text(`Events for ${query}`);
   let html = "";
   for (let i=0; i < json.length; i++){
     let event = json[i];
+    console.log(i);
     html += "<li>";
     // name of venue
     if(event.name !== undefined){
@@ -30,15 +32,16 @@ function displayResults(json, query){
     }
     // date of venue
     if(event.dates !== undefined){
-      html += `<p>${moment(event.dates.start.localDate + " " + event.dates.start.localTime).format('MMMM Do YYYY, h:mm a')}</p>`;
+      if(moment(event.dates.start.localDate + " " + event.dates.start.localTime).format('MMMM Do YYYY, h:mm a') == 'invalid date'){
+          html += `<p>TBD</p>`;
+      } else {html += `<p>${moment(event.dates.start.localDate + " " + event.dates.start.localTime).format('MMMM Do YYYY, h:mm a')}</p>`;}
     }
     // address of venue
     if(event._embedded !== undefined){
-      if(event._embedded.venues[0].state !== undefined){
+    if(event._embedded.venues[0].state !== undefined && event._embedded.venues[0].address.line1 !== undefined){
       html += `<p>${event._embedded.venues[0].address.line1}</p><p>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].state.stateCode}, ${event._embedded.venues[0].country.countryCode} ${event._embedded.venues[0].postalCode}</p>`;
-    }else{
-     html += `<p>${event._embedded.venues[0].address.line1}</p>
-      <p>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].country.countryCode} ${event._embedded.venues[0].postalCode}</p>`
+    }else {
+     html += `<p>${event._embedded.venues[0].city.name}, ${event._embedded.venues[0].country.name}</p>`;
     }}
     // price ranges
     if(event.priceRanges!== undefined){
