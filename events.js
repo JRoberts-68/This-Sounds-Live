@@ -71,8 +71,9 @@ function ticketmasterBuildUrl(query){
     .then(response => {
       if (response.ok) {
         return response.json();
-      }
-      throw new Error(response.statusText);
+      } else {
+        throw new Error(response.statusText);
+        }
     })
     .then(responseJson => displayResults(responseJson, query))
       .catch(err => {
