@@ -76,9 +76,9 @@ function ticketmasterBuildUrl(query){
         }
     })
     .then(responseJson => displayResults(responseJson, query))
-      .catch(err => {
-        $('#js-error').text(`Something went wrong: ${err.message}`);
-      });
+    .catch(err => {
+      $('#js-error').text(`Something went wrong: ${err.message}`);
+    });
 }
 
 // watchform to hold events until the information needed is submitted
