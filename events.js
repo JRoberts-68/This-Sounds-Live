@@ -90,6 +90,6 @@ function watchForm() {
     ticketmasterBuildUrl(searchTerm);
   });
 }
-$(watchForm());
+$(watchForm);
 
 
