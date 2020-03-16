@@ -62,7 +62,7 @@ input, button{
 }
 
 #search-bar::placeholder{
-    color: #FEFFF7;
+    color: #123442;
 }
 
 #login{
@@ -127,6 +127,6 @@ li h3{
 #sources{
     font-size: 10px;
     text-align: center;
-    color: #FEFFF7;
+    color: #123442;
     margin: auto;
 }

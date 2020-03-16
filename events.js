@@ -28,7 +28,7 @@ function displayResults(json, query){
     html += "<li>";
     // name of venue
     if(event.name !== undefined){
-      html += `<h3>${event.name}</h3>`;
+      html += `<h4>${event.name}</h4>`;
     }
     // date of venue
     if(event.dates !== undefined){
@@ -49,9 +49,9 @@ function displayResults(json, query){
     }
     // event url
     if(event.url!== undefined){
-      html += `<a href="${event.url}" rel="noreferrer noopener" target="_blank">For more event info click here</a>`;
+      html += `<a href="${event.url}" rel="noreferrer noopener" target="_blank">For more event info click here</a><br>`;
     }
-    html += `</li><br>`;
+    html += `</li>`;
   }
   
   $('#ticketmaster-search-results').html(html);
